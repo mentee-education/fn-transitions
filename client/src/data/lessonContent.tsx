@@ -96,7 +96,7 @@ const BeforeYouBegin = () => (
       "How does your location (urban, rural, remote, mobile) affect your transition?",
       "What supports do you have access to where you currently live?",
       "What supports might you need when you move into a new environment?",
-      "How do you feel seeing the range of communities across the province?",
+      "What comes to mind when you think about the range of First Nations communities across the province?",
     ]} />
 
     <H2>How This Program Helps You Build Your Learning Profile</H2>

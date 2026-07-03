@@ -395,7 +395,6 @@ export default function Course() {
           </div>
         </section>
 
-        {/* ===== MAP — Ontario communities ===== */}
 
         {/* ===== CTA — Full-width with canoe image ===== */}
         <section className="relative w-full overflow-hidden" style={{ minHeight: 580 }}>
