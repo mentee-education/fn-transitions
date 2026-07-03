@@ -8,7 +8,6 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import FntButton from "@/components/FntButton";
 import FntAccordion from "@/components/FntAccordion";
-import OntarioMapEmbed from "@/components/OntarioMapEmbed";
 
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/dbdnf9YxmUznohGAsnbG3a/coo_hero_wide-BNTHTVXA59ntYpaqUGu4dF.webp";
 const ABOUT_IMG = HERO_BG;
@@ -397,45 +396,6 @@ export default function Course() {
         </section>
 
         {/* ===== MAP — Ontario communities ===== */}
-        <section className="px-4 sm:px-6 py-14 sm:py-20" style={{ backgroundColor: "#E0DFD9" }}>
-          <div className="max-w-[1200px] mx-auto">
-            <FadeIn>
-              <div className="text-center mb-8">
-                <p
-                  className="uppercase tracking-[0.2em] mb-2 text-[11px] sm:text-[12px] font-semibold"
-                  style={{ fontFamily: "'DM Sans', sans-serif", color: "#BB0A12" }}
-                >
-                  Across Ontario
-                </p>
-                <h2
-                  className="font-bold mb-4"
-                  style={{
-                    fontFamily: "'Playfair Display', serif",
-                    fontSize: "clamp(24px, 3vw, 38px)",
-                    color: "#1a1a18",
-                    lineHeight: 1.15,
-                  }}
-                >
-                  Connecting Communities Through Education
-                </h2>
-                <p
-                  className="mx-auto max-w-[700px]"
-                  style={{
-                    fontFamily: "'Source Serif 4', serif",
-                    fontSize: "clamp(15px, 1.6vw, 17px)",
-                    color: "#3d3d39",
-                    lineHeight: 1.8,
-                  }}
-                >
-                  This project was shaped by engagement with First Nations communities, education staff, and learners across Ontario. The map reflects diverse First Nations communities in Ontario this project seeks to support.
-                </p>
-              </div>
-            </FadeIn>
-            <FadeIn delay={0.15}>
-              <OntarioMapEmbed height="550px" />
-            </FadeIn>
-          </div>
-        </section>
 
         {/* ===== CTA — Full-width with canoe image ===== */}
         <section className="relative w-full overflow-hidden" style={{ minHeight: 580 }}>
