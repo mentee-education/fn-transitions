@@ -74,11 +74,11 @@ const BeforeYouBegin = () => (
   <div>
     <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-6">Before You Begin: Context for the Path Forward</h1>
     <P>Every learner begins their education journey from a different place — geographically, emotionally, culturally, and personally. Some First Nations learners come from a First Nation. Others come from cities, towns, or several places they move between. Some may feel strongly connected to community, while others may be reconnecting, learning, or holding their identity in their own way. All of these experiences are valid.</P>
-    <P>This program begins with a broad look at First Nations across Ontario to honour this diversity. You may or may not see your own situation reflected on the map, and that is okay. The map is not meant to represent all First Nations experiences. Instead, it provides context for the many different realities people bring into education transitions.</P>
+    <P>This program begins with a broad look at First Nations across Ontario to honour this diversity. You may or may not see your own situation reflected here, and that is okay. This section is not meant to represent all First Nations experiences. Instead, it provides context for the many different realities people bring into education transitions.</P>
 
-    <H2>Why This Map Matters (Even If Your Experience Is Different)</H2>
-    <P>The map shows First Nations communities across Ontario and their on-reserve populations. For some learners, this may be the place they call home. For others, it may represent where family comes from, where connections are held, or simply part of the wider landscape of First Nations across the province.</P>
-    <P>This map is included because it helps show that:</P>
+    <H2>Why This Context Matters (Even If Your Experience Is Different)</H2>
+    <P>First Nations communities are spread across Ontario, each with their own on-reserve populations, geographies, and realities. For some learners, a community may be the place they call home. For others, it may represent where family comes from, where connections are held, or simply part of the wider landscape of First Nations across the province.</P>
+    <P>This context is included because it helps show that:</P>
     <UL>
       <LI>Not all learners live close to post-secondary opportunities</LI>
       <LI>Travel, distance, and location affect transitions in different ways</LI>
@@ -87,11 +87,8 @@ const BeforeYouBegin = () => (
       <LI>There is no single "First Nations learner experience"</LI>
     </UL>
     <P>If you come from a city, a northern community, a southern town, or multiple places, you belong in this program just as much as anyone. Your journey is shaped by your own circumstances, relationships, and experiences, wherever those may be.</P>
-    <P>This page simply helps place your story within a larger picture of First Nations presence, history, and identity across Ontario.</P>
+    <P>This section simply helps place your story within a larger picture of First Nations presence, history, and identity across Ontario.</P>
 
-    <H2>Exploring the Map</H2>
-    <P>The interactive map below displays First Nations communities across Ontario. Each bubble marks the location of a community, and the number inside shows its on-reserve population. Selecting a bubble opens a pop-up with the community name and additional details — offering a clear reference for understanding the distribution and population of First Nations communities across the province.</P>
-    <OntarioMap className="my-6" />
 
     <ReflectionBox questions={[
       "How would you describe the place or places you come from?",
