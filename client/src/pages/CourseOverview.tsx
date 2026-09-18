@@ -10,8 +10,8 @@ import FntAccordion from "@/components/FntAccordion";
 import { useState, useEffect, useRef } from "react";
 import { X, Download } from "lucide-react";
 
-const COURSE_HERO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/dbdnf9YxmUznohGAsnbG3a/coo_hero_wide-BNTHTVXA59ntYpaqUGu4dF.webp";
-const COURSE_ABOUT = "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/dbdnf9YxmUznohGAsnbG3a/coo_cta_section-MNkeMDJnGxmuGd7StAHjgE.webp";
+const COURSE_HERO = "https://pub-8445d67a8aa042a9adef9ee73ed5c0e8.r2.dev/coo_hero_wide.webp";
+const COURSE_ABOUT = "https://pub-8445d67a8aa042a9adef9ee73ed5c0e8.r2.dev/coo_cta_section.jpg";
 
 const whyTakeItems = [
   {
@@ -95,7 +95,7 @@ function FadeIn({ children, delay = 0, className = "" }: { children: React.React
   );
 }
 
-const PDF_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/dbdnf9YxmUznohGAsnbG3a/HonouringMyJourney_231a132e.pdf";
+const PDF_URL = "https://pub-8445d67a8aa042a9adef9ee73ed5c0e8.r2.dev/HonouringMyJourney.pdf";
 
 export default function CourseOverview() {
   const [showPdfPreview, setShowPdfPreview] = useState(false);

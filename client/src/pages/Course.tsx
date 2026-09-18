@@ -9,9 +9,9 @@ import SiteFooter from "@/components/SiteFooter";
 import FntButton from "@/components/FntButton";
 import FntAccordion from "@/components/FntAccordion";
 
-const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/dbdnf9YxmUznohGAsnbG3a/coo_hero_wide-BNTHTVXA59ntYpaqUGu4dF.webp";
+const HERO_BG = "https://pub-8445d67a8aa042a9adef9ee73ed5c0e8.r2.dev/coo_hero_wide.webp";
 const ABOUT_IMG = HERO_BG;
-const CTA_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/dbdnf9YxmUznohGAsnbG3a/coo_cta_section-MNkeMDJnGxmuGd7StAHjgE.webp";
+const CTA_IMG = "https://pub-8445d67a8aa042a9adef9ee73ed5c0e8.r2.dev/coo_cta_section.jpg";
 
 const faqItems = [
   {

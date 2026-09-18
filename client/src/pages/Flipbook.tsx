@@ -6,8 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
-const FLIPBOOK_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/dbdnf9YxmUznohGAsnbG3a/flipbook_2_817515d3.html";
-const COO_WATERMARK = "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/dbdnf9YxmUznohGAsnbG3a/coo-watermark-original_8f92bcd6.png";
+const FLIPBOOK_URL = "https://pub-8445d67a8aa042a9adef9ee73ed5c0e8.r2.dev/flipbook.html";
+const COO_WATERMARK = "https://pub-8445d67a8aa042a9adef9ee73ed5c0e8.r2.dev/coo-watermark.png";
 
 export default function Flipbook() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
