@@ -10,19 +10,19 @@ import SiteFooter from "@/components/SiteFooter";
 const documents: Record<string, { title: string; url: string }> = {
   strategy: {
     title: "Education Transition Strategy",
-    url: "/docs/strategy.html",
+    url: `${import.meta.env.BASE_URL}docs/strategy.html`,
   },
   report: {
     title: "Education Report",
-    url: "/docs/report.html",
+    url: `${import.meta.env.BASE_URL}docs/report.html`,
   },
   "best-practices": {
     title: "Best Practices",
-    url: "/docs/best-practices.html",
+    url: `${import.meta.env.BASE_URL}docs/best-practices.html`,
   },
   resources: {
     title: "Programs & Resources",
-    url: "/docs/resources.html",
+    url: `${import.meta.env.BASE_URL}docs/resources.html`,
   },
 };
 

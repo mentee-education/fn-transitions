@@ -3,3 +3,4 @@ dist
 .manus-logs
 .env
 .vercel
+dist-coo/

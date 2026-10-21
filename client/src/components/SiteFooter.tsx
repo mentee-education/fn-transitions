@@ -46,7 +46,7 @@ export default function SiteFooter() {
             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.opacity = "0.85"; }}
           >
             <img
-              src="/mentee-logo.svg"
+              src={`${import.meta.env.BASE_URL}mentee-logo.svg`}
               alt="Mentee"
               width={156}
               height={52}
