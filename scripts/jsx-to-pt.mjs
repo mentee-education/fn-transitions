@@ -217,7 +217,7 @@ function convertBlockChildren(children, out) {
         title = body[0].children.map((s) => s.text).join("");
         body.shift();
       }
-      out.push({ _type: "calloutBox", _key: k(), tone, centered: centered || undefined, spacing, title, body });
+      out.push({ _type: "calloutBox", _key: k(), tone, centered: centered || undefined, spacing, margin: /my-4/.test(cls) ? "my4" : "mb6", title, body });
     } else if (name === "div" && cls === "") {
       convertBlockChildren(child.children, out); // transparent wrapper
     } else {
