@@ -5,6 +5,7 @@
 import { useEffect, useRef, useState } from "react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const FLIPBOOK_URL = "https://pub-8445d67a8aa042a9adef9ee73ed5c0e8.r2.dev/flipbook.html";
 const COO_WATERMARK = "https://pub-8445d67a8aa042a9adef9ee73ed5c0e8.r2.dev/coo-watermark.png";
@@ -70,7 +71,7 @@ export default function Flipbook() {
             top: "50%",
             transform: "translateY(-50%)",
             width: "clamp(220px, 30vw, 420px)",
-            opacity: 0.12,
+            opacity: 0.06,
             pointerEvents: "none",
             userSelect: "none",
           }}
@@ -177,20 +178,55 @@ export default function Flipbook() {
             </div>
           )}
           {blobUrl && (
-            <iframe
-              ref={iframeRef}
-              src={blobUrl}
-              title="Education Report Flipbook"
-              style={{
-                width: "100%",
-                height: "80vh",
-                minHeight: 500,
-                border: "none",
-                outline: "none",
-                display: "block",
-              }}
-              allowFullScreen
-            />
+            <div style={{ position: "relative" }}>
+              <iframe
+                ref={iframeRef}
+                src={blobUrl}
+                title="Education Report Flipbook"
+                style={{
+                  width: "100%",
+                  height: "80vh",
+                  minHeight: 500,
+                  border: "none",
+                  outline: "none",
+                  display: "block",
+                }}
+                allowFullScreen
+              />
+              {[
+                { side: "left" as const, id: "prevBtn", Icon: ChevronLeft, label: "Previous page" },
+                { side: "right" as const, id: "nextBtn", Icon: ChevronRight, label: "Next page" },
+              ].map(({ side, id, Icon, label }) => (
+                <button
+                  key={id}
+                  aria-label={label}
+                  onClick={() => {
+                    const doc = iframeRef.current?.contentDocument;
+                    (doc?.getElementById(id) as HTMLElement | null)?.click();
+                  }}
+                  className="hidden sm:flex items-center justify-center transition-all"
+                  style={{
+                    position: "absolute",
+                    [side]: -8,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    width: 48,
+                    height: 48,
+                    borderRadius: "50%",
+                    background: "#ffffff",
+                    border: "1px solid #d4cfc6",
+                    boxShadow: "0 2px 10px rgba(0,0,0,0.12)",
+                    color: "#BB0A12",
+                    cursor: "pointer",
+                    zIndex: 5,
+                  }}
+                  onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.background = "#BB0A12"; el.style.color = "#ffffff"; }}
+                  onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.background = "#ffffff"; el.style.color = "#BB0A12"; }}
+                >
+                  <Icon className="w-6 h-6" />
+                </button>
+              ))}
+            </div>
           )}
           <div className="text-center mt-6 pb-4">
             <a
