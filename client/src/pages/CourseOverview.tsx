@@ -8,59 +8,12 @@ import SiteFooter from "@/components/SiteFooter";
 import FntButton from "@/components/FntButton";
 import FntAccordion from "@/components/FntAccordion";
 import { useState, useEffect, useRef } from "react";
+import { usePageContent } from "@/data/useCourse";
+import { OVERVIEW_DEFAULTS } from "@/data/pageDefaults";
 import { X, Download } from "lucide-react";
 
 const COURSE_HERO = "https://pub-8445d67a8aa042a9adef9ee73ed5c0e8.r2.dev/coo_hero_wide.webp";
 const COURSE_ABOUT = "https://pub-8445d67a8aa042a9adef9ee73ed5c0e8.r2.dev/coo_cta_section.jpg";
-
-const whyTakeItems = [
-  {
-    title: "Tools for Everyday Support",
-    content:
-      "This program provides educators and support teams with practical, ready-to-use tools that reflect real transition moments, including identity-building activities, readiness checklists, budgeting exercises, navigation tasks, and reflection prompts connected to Talia\u2019s Journey. Each module offers strategies you can apply immediately with students and families to strengthen confidence, build connection, and support clarity during important education transitions.",
-  },
-  {
-    title: "Strengthening Well-Being",
-    content:
-      "This program helps educators support emotional wellness, cultural grounding, and positive identity for First Nations learners. Through story, discussion, and guided activities, the modules build understanding of the pressures involved in leaving home, the importance of belonging, and the need for balance, while offering tools that help create culturally safe and supportive learning environments.",
-  },
-  {
-    title: "Community & Education Impact",
-    content:
-      "This program offers insights that strengthen programs, supports, and relationships across schools and communities. Through the story, videos, and activities, educators explore the broader realities that learners navigate, including adjusting to new environments and managing responsibilities in different settings, and gain approaches that help build more responsive, relational, and culturally informed transition supports.",
-  },
-];
-
-const faqItems = [
-  {
-    title: "How is the program structured and how do I work through it?",
-    content:
-      "You can complete the modules at your own pace, beginning with a short chapter from Talia\u2019s Journey and moving into a video, guided discussion questions, and three practical activities in each lesson. The structure is designed to make learning flexible and accessible, allowing you to explore key transition themes while immediately applying the tools in your own educational or community setting.",
-  },
-  {
-    title: "Who is this program designed for and who will benefit most?",
-    content:
-      "This program is intended for educators, counsellors, administrators, and community teams who support First Nations learners as they navigate significant educational transitions. It is well-suited for anyone who works closely with students and families and wants to deepen understanding, strengthen relationships, and build culturally grounded approaches to supporting learner success.",
-  },
-  {
-    title: "Who developed this program and what informed its design?",
-    content:
-      (<span>The program was developed by <a href="https://mentee.ca" target="_blank" rel="noopener noreferrer" style={{ color: "#BB0A12", textDecoration: "underline" }}>Mentee</a> and Chiefs of Ontario, drawing on extensive experience working alongside First Nations learners, families, educators, and community partners across Ontario. Its design reflects a commitment to culturally grounded practice, relationship-based learning, and supporting the real-world needs that students and support teams encounter during transitions.</span>),
-  },
-  {
-    title: "What research and engagement shaped the program content?",
-    content:
-      "The content is informed by the Chiefs of Ontario Supporting Education Transitions for First Nations Learners in Ontario research project, which highlighted key themes and experiences shared by learners, families, and education teams across the province. This program builds on those insights by translating them into practical tools, story-based learning, and educator-focused strategies that strengthen readiness, belonging, wellness, and successful navigation of education pathways.",
-  },
-];
-
-const modules = [
-  { num: "01", title: "Before the Journey", desc: "Preparing for change and leaving home", lessons: 4 },
-  { num: "02", title: "Arriving & Exploring", desc: "Building belonging in new environments", lessons: 3 },
-  { num: "03", title: "Life Skills in Motion", desc: "Independence, budgeting, and daily life", lessons: 3 },
-  { num: "04", title: "Wellness & Balance", desc: "Emotional health and cultural grounding", lessons: 3 },
-  { num: "05", title: "Moving Forward", desc: "Self-advocacy and future pathways", lessons: 3 },
-];
 
 function useInView(threshold = 0.15) {
   const ref = useRef<HTMLDivElement>(null);
@@ -97,7 +50,26 @@ function FadeIn({ children, delay = 0, className = "" }: { children: React.React
 
 const PDF_URL = "https://pub-8445d67a8aa042a9adef9ee73ed5c0e8.r2.dev/HonouringMyJourney.pdf";
 
+// FAQ items may carry linkText/linkUrl — render the link inside the plain content
+function withLink(items: { title: string; content: string; linkText?: string; linkUrl?: string }[]) {
+  return items.map((it) => {
+    if (!it.linkText || !it.linkUrl || !it.content.includes(it.linkText)) return it;
+    const [before, ...rest] = it.content.split(it.linkText);
+    return {
+      title: it.title,
+      content: (
+        <span>
+          {before}
+          <a href={it.linkUrl} target="_blank" rel="noopener noreferrer" style={{ color: "#BB0A12", textDecoration: "underline" }}>{it.linkText}</a>
+          {rest.join(it.linkText)}
+        </span>
+      ),
+    };
+  });
+}
+
 export default function CourseOverview() {
+  const c = usePageContent("overviewPage", OVERVIEW_DEFAULTS);
   const [showPdfPreview, setShowPdfPreview] = useState(false);
 
   return (
@@ -183,7 +155,7 @@ export default function CourseOverview() {
                     className="uppercase tracking-[0.2em] mb-3 text-[11px] sm:text-[13px] font-semibold"
                     style={{ fontFamily: "'DM Sans', sans-serif", color: "#e8a0a3" }}
                   >
-                    Chiefs of Ontario &middot; Online Program
+                    {c.heroLabel}
                   </p>
                   <h1
                     className="font-bold leading-[1.08] mb-5"
@@ -193,7 +165,7 @@ export default function CourseOverview() {
                       color: "#ffffff",
                     }}
                   >
-                    Strengthening Pathways for First Nations Learners
+                    {c.heroTitle}
                   </h1>
                   <p
                     className="mb-7"
@@ -204,18 +176,18 @@ export default function CourseOverview() {
                       lineHeight: 1.7,
                     }}
                   >
-                    A story-based, experiential program designed for educators and student support teams who work alongside First Nations learners through education transitions.
+                    {c.heroSubtitle}
                   </p>
                   <div className="flex flex-wrap items-center gap-4">
                     <FntButton href="/courses/transitions/lessons">
-                      BEGIN THE JOURNEY
+                      {c.heroCtaLabel}
                     </FntButton>
                     <button
                       onClick={() => setShowPdfPreview(true)}
                       className="inline-flex items-center gap-2 px-8 py-3.5 font-bold text-sm uppercase tracking-wider border-2 border-white text-white transition-all duration-200 hover:bg-white hover:text-[#1a1a18] cursor-pointer"
                       style={{ fontFamily: "'DM Sans', sans-serif", borderRadius: 2 }}
                     >
-                      HONOURING MY JOURNEY
+                      {c.heroPdfLabel}
                     </button>
                     <span
                       style={{
@@ -224,7 +196,7 @@ export default function CourseOverview() {
                         color: "rgba(255,255,255,0.5)",
                       }}
                     >
-                      5 Modules &middot; 16 Lessons &middot; Self-Paced
+                      {c.heroMeta}
                     </span>
                   </div>
                 </div>
@@ -241,7 +213,7 @@ export default function CourseOverview() {
                 className="text-center uppercase tracking-[0.2em] mb-2 text-[11px] sm:text-[12px] font-semibold"
                 style={{ fontFamily: "'DM Sans', sans-serif", color: "#BB0A12" }}
               >
-                Program Structure
+                {c.structureLabel}
               </p>
               <h2
                 className="font-bold text-center mb-3"
@@ -251,7 +223,7 @@ export default function CourseOverview() {
                   color: "#1a1a18",
                 }}
               >
-                Five Modules, One Journey
+                {c.structureHeading}
               </h2>
               <p
                 className="text-center mx-auto max-w-[600px] mb-10"
@@ -262,11 +234,11 @@ export default function CourseOverview() {
                   lineHeight: 1.7,
                 }}
               >
-                A story-based, experiential program with 16 lessons and hands-on activities.
+                {c.structureIntro}
               </p>
             </FadeIn>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5">
-              {modules.map((m, i) => (
+              {c.modules.map((m, i) => (
                 <FadeIn key={m.num} delay={i * 0.08}>
                   <div
                     className="relative p-5 sm:p-6 h-full flex flex-col"
@@ -340,7 +312,7 @@ export default function CourseOverview() {
                   className="uppercase tracking-[0.2em] mb-2 text-[11px] sm:text-[12px] font-semibold"
                   style={{ fontFamily: "'DM Sans', sans-serif", color: "#BB0A12" }}
                 >
-                  About This Program
+                  {c.aboutLabel}
                 </p>
                 <h2
                   className="font-bold mb-5"
@@ -351,7 +323,7 @@ export default function CourseOverview() {
                     lineHeight: 1.15,
                   }}
                 >
-                  Grounded in Story, Built for Practice
+                  {c.aboutHeading}
                 </h2>
                 <p
                   className="mb-5"
@@ -362,7 +334,7 @@ export default function CourseOverview() {
                     lineHeight: 1.8,
                   }}
                 >
-                  This stand-alone program equips educators, counsellors, and community support teams with knowledge, strategies, and activities to better understand and support First Nations learners during key education transitions.
+                  {c.aboutPara1}
                 </p>
                 <p
                   style={{
@@ -372,7 +344,7 @@ export default function CourseOverview() {
                     lineHeight: 1.8,
                   }}
                 >
-                  Each module opens with a chapter from <em>Talia's Journey</em>, followed by carefully selected videos, discussion prompts, and three ready-to-use activities that bring the learning to life.
+                  {c.aboutPara2Before}<em>{c.aboutPara2Em}</em>{c.aboutPara2After}
                 </p>
               </div>
             </FadeIn>
@@ -380,7 +352,7 @@ export default function CourseOverview() {
               <div className="overflow-hidden" style={{ borderRadius: 4 }}>
                 <img
                   src={COURSE_ABOUT}
-                  alt="Calm water and northern shoreline, matching project photography"
+                  alt={c.aboutImageAlt}
                   className="w-full h-auto block"
                   style={{ aspectRatio: "4/3", objectFit: "cover", objectPosition: "center 55%" }}
                 />
@@ -397,7 +369,7 @@ export default function CourseOverview() {
                 className="text-center uppercase tracking-[0.2em] mb-2 text-[11px] sm:text-[12px] font-semibold"
                 style={{ fontFamily: "'DM Sans', sans-serif", color: "#BB0A12" }}
               >
-                Why This Matters
+                {c.whyLabel}
               </p>
               <h2
                 className="font-bold text-center mb-8"
@@ -407,11 +379,11 @@ export default function CourseOverview() {
                   color: "#1a1a18",
                 }}
               >
-                Practical Tools, Deeper Understanding
+                {c.whyHeading}
               </h2>
             </FadeIn>
             <FadeIn delay={0.1}>
-              <FntAccordion items={whyTakeItems} />
+              <FntAccordion items={c.whyItems} />
             </FadeIn>
           </div>
         </section>
@@ -424,7 +396,7 @@ export default function CourseOverview() {
                 className="uppercase tracking-[0.2em] mb-2 text-[11px] sm:text-[12px] font-semibold"
                 style={{ fontFamily: "'DM Sans', sans-serif", color: "#e8a0a3" }}
               >
-                What You'll Explore
+                {c.learnLabel}
               </p>
               <h2
                 className="font-bold mb-4"
@@ -434,7 +406,7 @@ export default function CourseOverview() {
                   color: "#ffffff",
                 }}
               >
-                What You'll Learn
+                {c.learnHeading}
               </h2>
               <p
                 className="mx-auto max-w-[600px] mb-8"
@@ -445,20 +417,11 @@ export default function CourseOverview() {
                   lineHeight: 1.7,
                 }}
               >
-                Across five modules, you will explore:
+                {c.learnIntro}
               </p>
             </FadeIn>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 max-w-[700px] mx-auto text-left">
-              {[
-                "Understanding key transition moments",
-                "Supporting readiness to leave home",
-                "Strengthening belonging and identity",
-                "Helping learners build independence and life skills",
-                "Embedding cultural wellness and balance",
-                "Navigating systems and supporting self-advocacy",
-                "Building networks of support around students",
-                "Creating culturally safe, relational learning environments",
-              ].map((item, i) => (
+              {c.learnItems.map((item, i) => (
                 <FadeIn key={i} delay={i * 0.05}>
                   <div
                     className="flex items-start gap-3 py-2"
@@ -486,7 +449,7 @@ export default function CourseOverview() {
                 className="text-center uppercase tracking-[0.2em] mb-2 text-[11px] sm:text-[12px] font-semibold"
                 style={{ fontFamily: "'DM Sans', sans-serif", color: "#BB0A12" }}
               >
-                Questions
+                {c.faqLabel}
               </p>
               <h2
                 className="font-bold text-center mb-8 sm:mb-10"
@@ -496,11 +459,11 @@ export default function CourseOverview() {
                   color: "#1a1a18",
                 }}
               >
-                Frequently Asked
+                {c.faqHeading}
               </h2>
             </FadeIn>
             <FadeIn delay={0.1}>
-              <FntAccordion items={faqItems} />
+              <FntAccordion items={withLink(c.faqs)} />
             </FadeIn>
           </div>
         </section>
@@ -517,7 +480,7 @@ export default function CourseOverview() {
                   color: "#1a1a18",
                 }}
               >
-                Ready to Begin?
+                {c.ctaHeading}
               </h2>
               <p
                 className="mx-auto max-w-[550px] mb-8"
@@ -528,10 +491,10 @@ export default function CourseOverview() {
                   lineHeight: 1.7,
                 }}
               >
-                Start the program and explore five modules of story-based learning, practical activities, and tools for supporting First Nations learners.
+                {c.ctaBody}
               </p>
               <FntButton href="/courses/transitions/lessons">
-                BEGIN THE JOURNEY
+                {c.ctaButtonLabel}
               </FntButton>
             </FadeIn>
           </div>

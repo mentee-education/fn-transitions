@@ -4,7 +4,8 @@
 // Fonts: Playfair Display (headings), Source Serif 4 (body), DM Sans (UI)
 
 import { Link } from "wouter";
-import { COURSE, ALL_LESSONS } from "@/data/courseData";
+import { useCourse, usePageContent } from "@/data/useCourse";
+import { LESSONS_PAGE_DEFAULTS } from "@/data/pageDefaults";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { useState, useEffect, useRef } from "react";
@@ -61,6 +62,8 @@ function FadeIn({ children, delay = 0, className = "" }: { children: React.React
 }
 
 export default function CourseLessons() {
+  const { COURSE, ALL_LESSONS } = useCourse();
+  const c = usePageContent("lessonsPage", LESSONS_PAGE_DEFAULTS);
   const [completedLessons, setCompletedLessons] = useState<string[]>([]);
 
   useEffect(() => {
@@ -85,7 +88,7 @@ export default function CourseLessons() {
             className="uppercase tracking-[0.2em] mb-3 text-[11px] sm:text-[13px] font-semibold"
             style={{ fontFamily: "'DM Sans', sans-serif", color: "#BB0A12" }}
           >
-            Program Pathway
+            {c.headerLabel}
           </p>
           <h1
             className="font-bold leading-tight mb-4"
@@ -95,7 +98,7 @@ export default function CourseLessons() {
               color: "#1a1a18",
             }}
           >
-            Modules & Lessons
+            {c.headerTitle}
           </h1>
           <p
             className="mx-auto max-w-[600px] mb-6"
@@ -106,14 +109,14 @@ export default function CourseLessons() {
               lineHeight: 1.7,
             }}
           >
-            Work through each module at your own pace. Each includes a story chapter, video, discussion prompts, and hands-on activities.
+            {c.headerIntro}
           </p>
 
           {/* Progress Bar */}
           <div className="max-w-md mx-auto">
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-medium" style={{ fontFamily: "'DM Sans', sans-serif", color: "#6b6b65" }}>
-                Your Progress
+                {c.progressLabel}
               </span>
               <span className="text-sm font-bold" style={{ fontFamily: "'DM Sans', sans-serif", color: "#BB0A12" }}>
                 {progressPercent}% &mdash; {completedCount}/{totalLessons} lessons
@@ -201,10 +204,10 @@ export default function CourseLessons() {
                     className="font-bold"
                     style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(18px, 2.5vw, 22px)", color: "#1a1a18" }}
                   >
-                    Foundations
+                    {c.foundationsHeading}
                   </h2>
                   <p className="text-xs" style={{ fontFamily: "'DM Sans', sans-serif", color: "#8a7e72" }}>
-                    Key themes to explore before diving into the modules
+                    {c.foundationsIntro}
                   </p>
                 </div>
               </div>

@@ -5,8 +5,8 @@
 
 import { useParams, Link, useLocation } from "wouter";
 import { useState, useEffect, useCallback, useRef } from "react";
-import { COURSE, ALL_LESSONS, ALL_NAVIGABLE, getLessonBySlug, getLessonIndex, getPrevLesson, getNextLesson } from "@/data/courseData";
-import { getLessonContent } from "@/data/lessonContent";
+import { useCourse, useLessonBody } from "@/data/useCourse";
+import LessonBody from "@/components/LessonBody";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { Menu, X, ChevronLeft, ChevronRight, Check, BookOpen, Award } from "lucide-react";
@@ -26,6 +26,7 @@ export default function LessonPlayer() {
   const slug = params.slug || "";
   const [, navigate] = useLocation();
 
+  const { COURSE, ALL_LESSONS, getLessonBySlug, getLessonIndex, getPrevLesson, getNextLesson } = useCourse();
   const [completedLessons, setCompletedLessons] = useState<string[]>([]);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [hasScrolledEnough, setHasScrolledEnough] = useState(false);
@@ -77,7 +78,12 @@ export default function LessonPlayer() {
   const lessonIndex = getLessonIndex(slug);
   const prevLesson = getPrevLesson(slug);
   const nextLesson = getNextLesson(slug);
-  const content = getLessonContent(slug);
+  const { body, loading: contentLoading } = useLessonBody(slug);
+  const content = contentLoading ? (
+    <div className="animate-pulse text-[#8B2332] font-semibold py-12 text-center">Loading…</div>
+  ) : (
+    <LessonBody value={body || []} />
+  );
 
   const totalLessons = ALL_LESSONS.length;
   const completedCount = completedLessons.length;

@@ -8,49 +8,12 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import FntButton from "@/components/FntButton";
 import FntAccordion from "@/components/FntAccordion";
+import { usePageContent } from "@/data/useCourse";
+import { HOME_DEFAULTS } from "@/data/pageDefaults";
 
 const HERO_BG = "https://pub-8445d67a8aa042a9adef9ee73ed5c0e8.r2.dev/coo_hero_wide.webp";
 const ABOUT_IMG = HERO_BG;
 const CTA_IMG = "https://pub-8445d67a8aa042a9adef9ee73ed5c0e8.r2.dev/coo_cta_section.jpg";
-
-const faqItems = [
-  {
-    title: "What does the Education Transitions project include?",
-    content:
-      "This is a Chiefs of Ontario initiative that brings together research, strategy, best practices, and practical tools to strengthen how First Nations learners are supported through key education transitions. It includes a strategy, research report, best practices guide, resource directory, and an experiential online program.",
-  },
-  {
-    title: "Who is this project designed for?",
-    content:
-      "It is designed for educators, school counsellors, transition coordinators, student success leads, administrators, post-secondary advisors, community education support workers, and anyone involved in helping First Nations learners and their families navigate education transitions.",
-  },
-  {
-    title: "How were these resources developed?",
-    content:
-      "The resources were shaped through engagement with First Nations learners, communities, and education support staff across Ontario. These engagements included interviews, focus groups, and case studies. Chi-miigwech to everyone who contributed.",
-  },
-  {
-    title: "How do I get started with the resources?",
-    content:
-      "You can start with the Education Transition Strategy for the broader vision, the Research Report for detailed findings, the Best Practices guide for community-informed approaches, the Programs and Resources directory for regional supports, or jump directly into the online program.",
-  },
-];
-
-const pillars = [
-  { title: "Relationship-Based Support", desc: "Strong, ongoing relationships help First Nations learners feel supported and succeed through transitions." },
-  { title: "Holistic & Cultural Support", desc: "When learning supports academic, emotional, and cultural needs together, learners are more likely to thrive." },
-  { title: "Clear Information & Resources", desc: "Easy-to-find, culturally relevant information helps learners and families make confident decisions." },
-  { title: "Community Context Matters", desc: "Local realities, learner experiences, and supports are designed and delivered by communities." },
-  { title: "Effective Strategies", desc: "Mentorship, hands-on learning, and cultural programs build confidence and readiness for next steps." },
-];
-
-const siteResources = [
-  { title: "Education Strategy", desc: "A comprehensive strategy for supporting First Nations learner transitions across Ontario.", href: "/strategy" },
-  { title: "Research Report", desc: "Research findings and analysis on education transitions for First Nations learners.", href: "/report" },
-  { title: "Best Practices", desc: "Evidence-based practices for supporting First Nations learners through educational transitions.", href: "/best-practices" },
-  { title: "Programs & Resources", desc: "A directory of programs and resources available to support First Nations education transitions.", href: "/resources" },
-  { title: "Online Program", desc: "A story-based, experiential program with 5 modules, 16 lessons, and hands-on activities.", href: "/courses/transitions" },
-];
 
 function useInView(threshold = 0.15) {
   const ref = useRef<HTMLDivElement>(null);
@@ -86,6 +49,7 @@ function FadeIn({ children, delay = 0, className = "" }: { children: React.React
 }
 
 export default function Course() {
+  const c = usePageContent("homePage", HOME_DEFAULTS);
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: "#fdfcf9" }}>
       <SiteHeader />
@@ -120,7 +84,7 @@ export default function Course() {
                   color: "#ffffff",
                 }}
               >
-                Supporting Education Transitions for First Nations Learners
+                {c.heroTitle}
               </h1>
             </FadeIn>
             <FadeIn delay={0.3}>
@@ -133,12 +97,12 @@ export default function Course() {
                   lineHeight: 1.7,
                 }}
               >
-                Research, strategy, best practices, and practical tools to strengthen how First Nations learners are supported through key education transitions across Ontario.
+                {c.heroSubtitle}
               </p>
             </FadeIn>
             <FadeIn delay={0.45}>
               <FntButton href="/courses/transitions">
-                EXPLORE THE PROGRAM
+                {c.heroCtaLabel}
               </FntButton>
             </FadeIn>
           </div>
@@ -156,11 +120,11 @@ export default function Course() {
                 className="text-center uppercase tracking-[0.2em] mb-8 text-[11px] sm:text-[12px] font-semibold"
                 style={{ fontFamily: "'DM Sans', sans-serif", color: "#BB0A12" }}
               >
-                Explore the Project
+                {c.exploreLabel}
               </p>
             </FadeIn>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-5">
-              {siteResources.map((r, i) => (
+              {c.resources.map((r, i) => (
                 <FadeIn key={r.title} delay={i * 0.08}>
                   <a href={r.href} className="block h-full no-underline">
                     <div
@@ -202,7 +166,7 @@ export default function Course() {
               >
                 <img
                   src={ABOUT_IMG}
-                  alt="Northern forest pathway at dusk, echoing the project hero imagery"
+                  alt={c.aboutImageAlt}
                   className="w-full h-auto block"
                   style={{ aspectRatio: "4/3", objectFit: "cover", objectPosition: "30% 42%" }}
                 />
@@ -214,7 +178,7 @@ export default function Course() {
                   className="uppercase tracking-[0.2em] mb-2 text-[11px] sm:text-[12px] font-semibold"
                   style={{ fontFamily: "'DM Sans', sans-serif", color: "#BB0A12" }}
                 >
-                  About This Project
+                  {c.aboutLabel}
                 </p>
                 <h2
                   className="font-bold mb-5"
@@ -225,7 +189,7 @@ export default function Course() {
                     lineHeight: 1.15,
                   }}
                 >
-                  Shaped by the Voices of Learners and Communities
+                  {c.aboutHeading}
                 </h2>
                 <p
                   className="mb-4"
@@ -236,7 +200,7 @@ export default function Course() {
                     lineHeight: 1.8,
                   }}
                 >
-                  This work is shaped by the voices of First Nations learners, communities, and education support staff. Your stories guide these findings. Chi-miigwech for sharing your knowledge, strengths, and experiences.
+                  {c.aboutPara1}
                 </p>
                 <p
                   style={{
@@ -246,7 +210,7 @@ export default function Course() {
                     lineHeight: 1.8,
                   }}
                 >
-                  The project brings together a comprehensive education transition strategy, research findings, evidence-based best practices, a resource directory, and an experiential online program — all grounded in self-determination, culture, and holistic wellbeing.
+                  {c.aboutPara2}
                 </p>
               </div>
             </FadeIn>
@@ -262,7 +226,7 @@ export default function Course() {
                   className="uppercase tracking-[0.2em] mb-2 text-[11px] sm:text-[12px] font-semibold"
                   style={{ fontFamily: "'DM Sans', sans-serif", color: "#BB0A12" }}
                 >
-                  Relationships at the Heart
+                  {c.pillarsLabel}
                 </p>
                 <h2
                   className="font-bold"
@@ -272,14 +236,14 @@ export default function Course() {
                     color: "#1a1a18",
                   }}
                 >
-                  What Supports Successful Transitions
+                  {c.pillarsHeading}
                 </h2>
               </div>
             </FadeIn>
             {/* Pillar cards: 2-column grid on sm+, single column on mobile, last item centered */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {pillars.map((p, i) => (
-                <FadeIn key={p.title} delay={i * 0.08} className={i === pillars.length - 1 && pillars.length % 2 !== 0 ? "sm:col-span-2 sm:max-w-[50%] sm:mx-auto" : ""}>
+              {c.pillars.map((p, i) => (
+                <FadeIn key={p.title} delay={i * 0.08} className={i === c.pillars.length - 1 && c.pillars.length % 2 !== 0 ? "sm:col-span-2 sm:max-w-[50%] sm:mx-auto" : ""}>
                   <div
                     className="p-6 h-full"
                     style={{
@@ -314,7 +278,7 @@ export default function Course() {
                 className="uppercase tracking-[0.2em] mb-2 text-[11px] sm:text-[12px] font-semibold"
                 style={{ fontFamily: "'DM Sans', sans-serif", color: "#e8a0a3" }}
               >
-                What Works Best
+                {c.approachesLabel}
               </p>
               <h2
                 className="font-bold mb-4"
@@ -324,7 +288,7 @@ export default function Course() {
                   color: "#ffffff",
                 }}
               >
-                Effective Approaches That Support Success
+                {c.approachesHeading}
               </h2>
               <p
                 className="mx-auto max-w-[600px] mb-8"
@@ -335,20 +299,11 @@ export default function Course() {
                   lineHeight: 1.7,
                 }}
               >
-                Key approaches identified through research and community engagement:
+                {c.approachesIntro}
               </p>
             </FadeIn>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 max-w-[700px] mx-auto text-left">
-              {[
-                "Building resilience and self-advocacy skills",
-                "Creating culturally safe Indigenous spaces",
-                "Providing structured transition supports",
-                "Offering holistic wraparound supports",
-                "Maintaining strong, ongoing relationships",
-                "Indigenous-led mentorship and peer networks",
-                "Hands-on, youth-centered learning experiences",
-                "First Nations-led decision-making in education",
-              ].map((item, i) => (
+              {c.approaches.map((item, i) => (
                 <FadeIn key={i} delay={i * 0.05}>
                   <div
                     className="flex items-start gap-3 py-2"
@@ -376,7 +331,7 @@ export default function Course() {
                 className="text-center uppercase tracking-[0.2em] mb-2 text-[11px] sm:text-[12px] font-semibold"
                 style={{ fontFamily: "'DM Sans', sans-serif", color: "#BB0A12" }}
               >
-                Learn More
+                {c.faqLabel}
               </p>
               <h2
                 className="font-bold text-center mb-8 sm:mb-10"
@@ -386,11 +341,11 @@ export default function Course() {
                   color: "#1a1a18",
                 }}
               >
-                Frequently Asked Questions
+                {c.faqHeading}
               </h2>
             </FadeIn>
             <FadeIn delay={0.1}>
-              <FntAccordion items={faqItems} />
+              <FntAccordion items={c.faqs} />
             </FadeIn>
           </div>
         </section>
@@ -420,7 +375,7 @@ export default function Course() {
                     className="uppercase tracking-[0.2em] mb-2 text-[11px] sm:text-[12px] font-semibold"
                     style={{ fontFamily: "'DM Sans', sans-serif", color: "#BB0A12" }}
                   >
-                    Begin Your Journey
+                    {c.ctaLabel2}
                   </p>
                   <h2
                     className="font-bold mb-5 leading-[1.1]"
@@ -430,7 +385,7 @@ export default function Course() {
                       color: "#ffffff",
                     }}
                   >
-                    Let's strengthen learner pathways together.
+                    {c.ctaHeading}
                   </h2>
                   <p
                     className="mb-7"
@@ -441,10 +396,10 @@ export default function Course() {
                       lineHeight: 1.7,
                     }}
                   >
-                    The program emerged from engagement with First Nations learners, families, and education staff throughout Ontario, and supports recommendations from the Chiefs of Ontario Post-Secondary Engagement Report.
+                    {c.ctaBody}
                   </p>
                   <FntButton href="/courses/transitions">
-                    GET STARTED
+                    {c.ctaButtonLabel}
                   </FntButton>
                 </div>
               </FadeIn>

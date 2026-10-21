@@ -6,6 +6,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import PasswordGate from "./components/PasswordGate";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import ScrollToTop from "./components/ScrollToTop";
+import { CourseProvider } from "./data/useCourse";
 import Course from "./pages/Course";
 import CourseOverview from "./pages/CourseOverview";
 import CourseLessons from "./pages/CourseLessons";
@@ -15,6 +16,7 @@ import DocumentViewer from "./pages/DocumentViewer";
 import Flipbook from "./pages/Flipbook";
 import { lazy, Suspense } from "react";
 
+const StudioPage = lazy(() => import("./pages/StudioPage"));
 const Activity1 = lazy(() => import("./pages/activities/Activity1"));
 const Activity2 = lazy(() => import("./pages/activities/Activity2"));
 const Activity3 = lazy(() => import("./pages/activities/Activity3"));
@@ -43,6 +45,14 @@ function Router() {
   return (
     <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
       <ScrollToTop />
+      <Route path={"/studio"} nest>
+        {() => (
+          <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading Studio…</div>}>
+            <StudioPage />
+          </Suspense>
+        )}
+      </Route>
+      <CourseProvider>
       <Switch>
         <Route path={"/"} component={Course} />
         <Route path={"/courses/transitions"} component={CourseOverview} />
@@ -72,6 +82,7 @@ function Router() {
         <Route path={"/404"} component={NotFound} />
         <Route component={NotFound} />
       </Switch>
+      </CourseProvider>
     </WouterRouter>
   );
 }
