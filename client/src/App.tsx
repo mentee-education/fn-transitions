@@ -13,7 +13,6 @@ import LessonPlayer from "./pages/LessonPlayer";
 import DocumentViewer from "./pages/DocumentViewer";
 
 import Flipbook from "./pages/Flipbook";
-import Certificate from "./pages/Certificate";
 import { lazy, Suspense } from "react";
 
 const Activity1 = lazy(() => import("./pages/activities/Activity1"));
@@ -55,7 +54,6 @@ function Router() {
         <Route path={"/resources"} component={DocumentViewer} />
 
         <Route path={"/flipbook"} component={Flipbook} />
-        <Route path={"/certificate"} component={Certificate} />
         <Route path={"/activities/1"}>{() => <ActivityLoader><Activity1 /></ActivityLoader>}</Route>
         <Route path={"/activities/2"}>{() => <ActivityLoader><Activity2 /></ActivityLoader>}</Route>
         <Route path={"/activities/3"}>{() => <ActivityLoader><Activity3 /></ActivityLoader>}</Route>

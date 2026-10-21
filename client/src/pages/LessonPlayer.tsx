@@ -501,7 +501,7 @@ export default function LessonPlayer() {
                   </div>
                 </Link>
               ) : (
-                <Link href="/certificate" className="flex-1">
+                <Link href="/courses/transitions" className="flex-1">
                   <div className="group h-full p-4 sm:p-5 rounded-sm border transition-all cursor-pointer text-right" style={{ borderColor: "#D4A853" }}>
                     <div className="flex items-center justify-end gap-2 text-xs mb-1" style={{ color: "#D4A853", fontFamily: "'DM Sans', sans-serif" }}>
                       <Award className="w-3.5 h-3.5" />
@@ -509,7 +509,7 @@ export default function LessonPlayer() {
                       <ChevronRight className="w-3.5 h-3.5" />
                     </div>
                     <p className="text-sm font-semibold group-hover:text-[#D4A853] transition-colors leading-snug" style={{ fontFamily: "'DM Sans', sans-serif", color: "#1a1a18" }}>
-                      Claim Your Certificate
+                      Program Complete
                     </p>
                   </div>
                 </Link>
