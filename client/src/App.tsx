@@ -54,6 +54,7 @@ function Router() {
       </Route>
       <CourseProvider>
       <Switch>
+        <Route path={"/studio"} nest>{() => null}</Route>
         <Route path={"/"} component={Course} />
         <Route path={"/courses/transitions"} component={CourseOverview} />
         <Route path={"/courses/transitions/lessons"} component={CourseLessons} />

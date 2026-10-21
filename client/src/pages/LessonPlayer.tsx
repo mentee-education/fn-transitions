@@ -55,8 +55,11 @@ export default function LessonPlayer() {
     setHasScrolledEnough(false);
   }, [slug]);
 
-  // Track scroll progress to unlock Mark Complete
+  const { body, loading: contentLoading } = useLessonBody(slug);
+
+  // Track scroll progress to unlock Mark Complete (only once real content is in)
   useEffect(() => {
+    if (contentLoading) return;
     const handleScroll = () => {
       if (!contentRef.current) return;
       const rect = contentRef.current.getBoundingClientRect();
@@ -72,13 +75,12 @@ export default function LessonPlayer() {
     // Check immediately in case content is short
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [slug]);
+  }, [slug, contentLoading]);
 
   const lesson = getLessonBySlug(slug);
   const lessonIndex = getLessonIndex(slug);
   const prevLesson = getPrevLesson(slug);
   const nextLesson = getNextLesson(slug);
-  const { body, loading: contentLoading } = useLessonBody(slug);
   const content = contentLoading ? (
     <div className="animate-pulse text-[#8B2332] font-semibold py-12 text-center">Loading…</div>
   ) : (
