@@ -165,9 +165,12 @@ function convertBlockChildren(children, out) {
     const cls = classNameOf(child);
 
     if (name === "P" || name === "p") {
-      // quote-styled paragraphs inside callouts keep an emphasis look via style
+      // styled raw <p> variants inside callout boxes
       if (/italic/.test(cls)) out.push(makeBlock(child, "quote"));
       else if (/text-2xl/.test(cls)) out.push(makeBlock(child, "display"));
+      else if (/font-semibold/.test(cls)) out.push(makeBlock(child, "accent"));
+      else if (/font-bold/.test(cls) && /text-gray-800/.test(cls)) out.push(makeBlock(child, "signTitle"));
+      else if (name === "p" && /text-gray-700/.test(cls)) out.push(makeBlock(child, "plain"));
       else out.push(makeBlock(child, "normal"));
     } else if (name === "H2" || name === "h2") out.push(makeBlock(child, "h2"));
     else if (name === "H3" || name === "h3") out.push(makeBlock(child, "h3"));
@@ -204,12 +207,12 @@ function convertBlockChildren(children, out) {
       convertBlockChildren(child.children, body);
       // a leading fully-bold paragraph (the box's heading, e.g. "Module Activities")
       let title;
+      const firstEl = child.children.find((c) => c.type === "JSXElement");
       if (
         body[0] &&
         body[0]._type === "block" &&
         body[0].children.length &&
-        /font-bold/.test(classNameOf(child.children.find((c) => c.type === "JSXElement")) || "") &&
-        body[0].style === "normal"
+        new RegExp("font-bold text-" + tone + "-800").test(classNameOf(firstEl) || "")
       ) {
         title = body[0].children.map((s) => s.text).join("");
         body.shift();

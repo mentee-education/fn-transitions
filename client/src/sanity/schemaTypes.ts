@@ -98,6 +98,9 @@ const lessonBody = defineType({
               type: "block",
               styles: [
                 { title: "Paragraph", value: "normal" },
+                { title: "Plain line", value: "plain" },
+                { title: "Sign title (bold)", value: "signTitle" },
+                { title: "Accent line", value: "accent" },
                 { title: "Quote line (italic)", value: "quote" },
                 { title: "Big statement", value: "display" },
               ],

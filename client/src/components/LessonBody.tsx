@@ -21,6 +21,9 @@ const toneBorder: Record<string, string> = {
   purple: "bg-purple-50 border-purple-200",
   teal: "bg-teal-50 border-teal-200",
 };
+const toneAccent: Record<string, string> = {
+  green: "text-green-700", blue: "text-blue-700", amber: "text-amber-700", purple: "text-purple-700", teal: "text-teal-700",
+};
 const toneTitle: Record<string, string> = {
   green: "text-green-800",
   blue: "text-blue-800",
@@ -97,6 +100,9 @@ const marks = {
 const calloutComponents = (tone: string): PortableTextComponents => ({
   block: {
     normal: ({ children }) => <P>{children}</P>,
+    plain: ({ children }) => <p className="text-gray-700">{children}</p>,
+    signTitle: ({ children }) => <p className="font-bold text-gray-800">{children}</p>,
+    accent: ({ children }) => <p className={`font-semibold ${toneAccent[tone]}`}>{children}</p>,
     quote: ({ children }) => <p className="text-gray-700 italic">{children}</p>,
     display: ({ children }) => <p className={`text-2xl font-bold ${toneTitle[tone]}`}>{children}</p>,
   },
