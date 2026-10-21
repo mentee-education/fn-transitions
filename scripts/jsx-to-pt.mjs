@@ -195,6 +195,11 @@ function convertBlockChildren(children, out) {
     } else if (name === "div" && /bg-(green|blue|amber|purple|teal)-50/.test(cls)) {
       const tone = cls.match(/bg-(green|blue|amber|purple|teal)-50/)[1];
       const centered = /text-center/.test(cls);
+      const spacing = /space-y-1/.test(cls)
+        ? "tight"
+        : child.children.some((c) => c.type === "JSXElement" && /mt-2/.test((attr(c, "className") || "")))
+        ? "loose"
+        : undefined;
       const body = [];
       convertBlockChildren(child.children, body);
       // a leading fully-bold paragraph (the box's heading, e.g. "Module Activities")
@@ -209,7 +214,7 @@ function convertBlockChildren(children, out) {
         title = body[0].children.map((s) => s.text).join("");
         body.shift();
       }
-      out.push({ _type: "calloutBox", _key: k(), tone, centered: centered || undefined, title, body });
+      out.push({ _type: "calloutBox", _key: k(), tone, centered: centered || undefined, spacing, title, body });
     } else if (name === "div" && cls === "") {
       convertBlockChildren(child.children, out); // transparent wrapper
     } else {

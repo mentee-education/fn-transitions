@@ -66,8 +66,9 @@ function ReflectionBox({ questions }: { questions: string[] }) {
 
 function CalloutBox({ value }: { value: any }) {
   const tone = value.tone || "green";
+  const spacing = value.spacing === "tight" ? "space-y-1" : value.spacing === "loose" ? "[&>*+*]:mt-2" : "";
   return (
-    <div className={`${toneBorder[tone]} border rounded p-4 mb-6 ${value.centered ? "my-4 text-center" : ""}`}>
+    <div className={`${toneBorder[tone]} border rounded p-4 mb-6 ${value.centered ? "my-4 text-center" : ""} ${spacing}`}>
       {value.title ? <p className={`font-bold ${toneTitle[tone]} mb-2`}>{value.title}</p> : null}
       <PortableText value={value.body || []} components={calloutComponents(tone)} />
     </div>
@@ -95,7 +96,7 @@ const marks = {
 
 const calloutComponents = (tone: string): PortableTextComponents => ({
   block: {
-    normal: ({ children }) => <p className="text-gray-700">{children}</p>,
+    normal: ({ children }) => <P>{children}</P>,
     quote: ({ children }) => <p className="text-gray-700 italic">{children}</p>,
     display: ({ children }) => <p className={`text-2xl font-bold ${toneTitle[tone]}`}>{children}</p>,
   },
