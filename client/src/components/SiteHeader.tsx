@@ -85,7 +85,6 @@ export default function SiteHeader() {
           <div
             style={{
               flex: 1,
-              display: "flex",
               justifyContent: "center",
               alignItems: "center",
               gap: "1.5rem",
