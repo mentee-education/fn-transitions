@@ -207,7 +207,8 @@ export default function Flipbook() {
                   className="hidden sm:flex items-center justify-center transition-all"
                   style={{
                     position: "absolute",
-                    [side]: -8,
+                    // Overhang the frame by 8px only when there is room; inset 8px when the frame meets the screen edge
+                    [side]: "max(-8px, min(8px, calc(608px - 50vw)))",
                     top: "50%",
                     transform: "translateY(-50%)",
                     width: 48,
@@ -233,6 +234,7 @@ export default function Flipbook() {
               href="/report"
               className="inline-block"
               style={{
+                paddingTop: 3,
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: 13,
                 fontWeight: 600,
