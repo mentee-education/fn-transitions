@@ -110,7 +110,8 @@
       "picomatch": "^4.0.4",
       "browserslist": "^4.28.7",
       "source-map-js": "^1.2.2",
-      "nanoid@5": "^5.1.16"
+      "nanoid@5": "^5.1.16",
+      "dompurify": "^3.4.17"
     }
   }
 }
